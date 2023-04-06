@@ -1,13 +1,13 @@
 package com.binar.springboot.crud_rest_task.models;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
 
 @Setter @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "film")
+@Table(name = "film", schema = "public")
 public class Film {
 
     @Id
@@ -31,7 +31,7 @@ public class Film {
 
     private String rating;
 
-    private Long lastUpdate;
+    private String lastUpdate; // "yyyy-mm-dd HH:mm:ss"
 
 
 }
