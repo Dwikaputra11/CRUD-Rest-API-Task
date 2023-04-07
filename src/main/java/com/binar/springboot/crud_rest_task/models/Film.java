@@ -21,13 +21,13 @@ public class Film {
 
     private String releaseYear;
 
-    private int rentalDuration;
+    private Integer rentalDuration;
 
-    private double rentalRate;
+    private Double rentalRate;
 
-    private int length;
+    private Integer length;
 
-    private double replacementCost;
+    private Double replacementCost;
 
     private String rating;
 
