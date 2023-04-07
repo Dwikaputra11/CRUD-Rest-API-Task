@@ -68,7 +68,7 @@ public class FilmController {
 //    public ResponseEntity<Object> fingByRating(@RequestParam("rating") String rating){
 //        List<Film> filmList = filmService.findByRating(rating);
 //        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
-////        return filmRepository.findByRating(rating);
+//        return filmRepository.findByRating(rating);
 //    }
 
 
