@@ -1,6 +1,7 @@
 package com.binar.springboot.crud_rest_task.controller;
 
 import com.binar.springboot.crud_rest_task.models.Film;
+import com.binar.springboot.crud_rest_task.repos.FilmRepository;
 import com.binar.springboot.crud_rest_task.service.FilmService;
 import com.binar.springboot.crud_rest_task.utils.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class FilmController {
         Film film = filmService.findById(id);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,film);
     }
-    
+
     @GetMapping("/film/save")
     public ResponseEntity<Object> save(@RequestBody Film film){
         filmService.save(film);
@@ -51,4 +52,22 @@ public class FilmController {
         List<Film> filmList = filmService.findByRentalDurationRange(from, to);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
     }
+
+//    @GetMapping("/findByRc/{replacement_cost}")
+//    public List<Film> findByRc(@PathVariable double replacementCost){
+//        List<Film> findRc = filmService.findByRc(replacementCost);
+//        return findRc;
+//    }
+
+//    @GetMapping("/film/findByRating")
+//    public ResponseEntity<Object> fingByRating(@RequestParam("rating") String rating){
+//        List<Film> filmList = filmService.findByRating(rating);
+//        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
+//        return filmRepository.findByRating(rating);
+//    }
+
+
+
+
+
 }
