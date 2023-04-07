@@ -34,6 +34,17 @@ public class FilmController {
         Film film = filmService.findById(id);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,film);
     }
+    
+    @GetMapping("/film/save")
+    public ResponseEntity<Object> save(@RequestBody Film film){
+        filmService.save(film);
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,film);
+    }
+
+    @GetMapping("/film/update")
+    public ResponseEntity<Object> update(@RequestBody int id, Film film ){
+        filmService.update(id, film);
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,film);
 
     @GetMapping("/film/search")
     public ResponseEntity<Object> findByRentalDurationRange(@RequestParam("from") int from, @RequestParam("to") int to){
