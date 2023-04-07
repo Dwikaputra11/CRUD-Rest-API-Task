@@ -1,7 +1,6 @@
 package com.binar.springboot.crud_rest_task.controller;
 
 import com.binar.springboot.crud_rest_task.models.Film;
-import com.binar.springboot.crud_rest_task.repos.FilmRepository;
 import com.binar.springboot.crud_rest_task.service.FilmService;
 import com.binar.springboot.crud_rest_task.utils.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,21 +52,10 @@ public class FilmController {
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
     }
 
-//    @GetMapping("/findByRc/{replacement_cost}")
-//    public List<Film> findByRc(@PathVariable double replacementCost){
-//        List<Film> findRc = filmService.findByRc(replacementCost);
-//        return findRc;
-//    }
-
-//    @GetMapping("/film/findByRating")
-//    public ResponseEntity<Object> fingByRating(@RequestParam("rating") String rating){
-//        List<Film> filmList = filmService.findByRating(rating);
-//        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
-//        return filmRepository.findByRating(rating);
-//    }
-
-
-
-
-
+    @GetMapping("/film/findByRc")
+    public ResponseEntity<Object> findByRc(@RequestParam("r_cost") double replacementCost){
+//        double cost = Double.parseDouble(replacementCost);
+        List<Film> filmList = filmService.findByRc(replacementCost);
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
+    }
 }

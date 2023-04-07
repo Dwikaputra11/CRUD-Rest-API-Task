@@ -36,6 +36,16 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
+    public List<Film> findByRc(double replacementCost) {
+        return filmRepository.findByRc(replacementCost);
+    }
+
+//    @Override
+//    public List<Film> findByRating(String rating) {
+//        return filmRepository.findByRating(rating);
+//    }
+
+    @Override
     public List<Film> findByRentalDurationRange(int from, int to) {
         return filmRepository.findByRentalDurationRange(from, to);
     }
