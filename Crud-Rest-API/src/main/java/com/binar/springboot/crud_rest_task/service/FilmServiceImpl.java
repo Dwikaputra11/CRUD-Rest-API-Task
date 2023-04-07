@@ -28,12 +28,12 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public List<Film> findByRc(double replacementCost) {
-        return null;
+        return filmRepository.findByRc(replacementCost);
     }
 
     @Override
     public List<Film> findByRating(String rating) {
-        return null;
+        return filmRepository.findByRating(rating);
     }
 
     @Override
