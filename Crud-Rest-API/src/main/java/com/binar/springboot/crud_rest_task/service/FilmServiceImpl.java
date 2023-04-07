@@ -22,6 +22,11 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
+    public Film findById(int id) {
+        return null;
+    }
+
+    @Override
     public List<Film> findByRc(double replacementCost) {
         return null;
     }
