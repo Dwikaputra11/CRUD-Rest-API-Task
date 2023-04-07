@@ -1,8 +1,10 @@
 package com.binar.springboot.crud_rest_task.exception;
 
 import com.binar.springboot.crud_rest_task.utils.ResponseHandler;
+import org.hibernate.JDBCException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -31,8 +33,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseHandler.generateResponse(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, null);
     }
-    @ExceptionHandler({ Exception.class })
-    public ResponseEntity<Object> handleAll(final Exception ex, final WebRequest request) {
+    @ExceptionHandler({ DataAccessException.class })
+    public ResponseEntity<Object> handleDataAccessException(final DataAccessException ex, final WebRequest request) {
+        logger.info(ex.getClass().getName());
+
+        return ResponseHandler.generateResponse(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST, null);
+    }
+
+    @ExceptionHandler({ RuntimeException.class })
+    public ResponseEntity<Object> handleAll(final RuntimeException ex, final WebRequest request) {
         logger.info(ex.getClass().getName());
         logger.error("error", ex);
 
