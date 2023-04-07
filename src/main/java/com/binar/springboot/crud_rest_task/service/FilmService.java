@@ -13,9 +13,9 @@ public interface FilmService {
 
     List<Film> findByRentalDurationRange(int from, int to);
 
-    Film save(Film film);
+    Film save (Film film);
 
-    Film update(Film film);
+    Film update(int id, Film updatedFilm);
 
     void delete(int id);
 
