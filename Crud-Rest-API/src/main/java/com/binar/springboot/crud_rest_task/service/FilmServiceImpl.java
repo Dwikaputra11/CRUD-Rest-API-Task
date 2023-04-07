@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilmServiceImpl implements FilmService {
@@ -23,27 +24,56 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public Film findById(int id) {
-        return null;
+        Optional<Film> result = filmRepository.findById(id);
+        Film film;
+
+        if (result.isPresent()) {
+            film = result.get();
+        }else
+            throw new RuntimeException("Could not find film with id: " + id);
+
+        return film;
     }
 
     @Override
-    public List<Film> findByRc(double replacementCost) {
-        return filmRepository.findByRc(replacementCost);
-    }
-
-    @Override
-    public List<Film> findByRating(String rating) {
-        return filmRepository.findByRating(rating);
+    public List<Film> findByRentalDurationRange(int from, int to) {
+        return filmRepository.findByRentalDurationRange(from, to);
     }
 
     @Override
     public Film save(Film film) {
-        return null;
+        if (film.getTitle() != null && !film.getTitle().isEmpty()
+                && film.getDescription() != null && !film.getDescription().isEmpty()
+                && film.getReleaseYear() != null && !film.getReleaseYear().isEmpty()
+                && film.getRentalDuration() > 0 && film.getRentalRate() > 0 && film.getLength() > 0
+                && film.getReplacementCost() > 0 && film.getRating() != null && !film.getRating().isEmpty()
+                && film.getLastUpdate() != null && !film.getLastUpdate().isEmpty()) {
+            return filmRepository.save(film);
+        } else {
+            throw new RuntimeException("Data film tidak lengkap");
+        }
     }
 
     @Override
-    public Film update(Film film) {
-        return null;
+    public Film update(int id, Film updatedFilm) {
+        Optional<Film> result = filmRepository.findById(id);
+        Film film;
+
+        if (result.isPresent()) {
+            film = result.get();
+            film.setTitle(updatedFilm.getTitle());
+            film.setDescription(updatedFilm.getDescription());
+            film.setReleaseYear(updatedFilm.getReleaseYear());
+            film.setRentalDuration(updatedFilm.getRentalDuration());
+            film.setRentalRate(updatedFilm.getRentalRate());
+            film.setLength(updatedFilm.getLength());
+            film.setReplacementCost(updatedFilm.getReplacementCost());
+            film.setRating(updatedFilm.getRating());
+            film.setLastUpdate(updatedFilm.getLastUpdate());
+            return filmRepository.save(film);
+        } else {
+            throw new RuntimeException("Data film tidak ditemukan");
+        }
     }
 
     @Override
