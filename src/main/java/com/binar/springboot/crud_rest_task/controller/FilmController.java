@@ -1,7 +1,6 @@
 package com.binar.springboot.crud_rest_task.controller;
 
 import com.binar.springboot.crud_rest_task.models.Film;
-import com.binar.springboot.crud_rest_task.request.RangeDuration;
 import com.binar.springboot.crud_rest_task.service.FilmService;
 import com.binar.springboot.crud_rest_task.utils.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +41,10 @@ public class FilmController {
     }
 
     @GetMapping("/film/update")
-    public ResponseEntity<Object> update(@RequestBody int id, Film film ){
+    public ResponseEntity<Object> update(@RequestBody int id, Film film ) {
         filmService.update(id, film);
-        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,film);
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, film);
+    }
 
     @GetMapping("/film/search")
     public ResponseEntity<Object> findByRentalDurationRange(@RequestParam("from") int from, @RequestParam("to") int to){
