@@ -12,10 +12,10 @@ import java.util.Optional;
 public interface FilmRepository extends JpaRepository<Film, Integer> {
     // find film by length > 60
     // find film by replacementCost > 10
-    @Query(value = "SELECT f FROM Film f WHERE f.replacementCost > ?1")
+    @Query(value = "SELECT f FROM Film f WHERE f.replacementCost < ?1")
     List<Film> findByRc(double replacementCost);
     // find by Rating
-    @Query(value = "SELECT f FROM Film f WHERE f.rating = ?1")
-    List< Film> findByRating(String rating);
+    @Query("SELECT f FROM Film f WHERE f.rating = ?1")
+    List<Film> findByRating(String rating);
     // find by rental duration between 2 and 5
 }

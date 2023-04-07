@@ -19,6 +19,7 @@ public class FilmController {
 
     private final FilmService filmService;
     private static final String SUCCESS_MSG = "Successfully retrieved data!";
+    private static final String ERROR_MSG = "Failed to retrieve data!";
 
     @Autowired
     FilmRepository filmRepository;
@@ -42,7 +43,19 @@ public class FilmController {
     public ResponseEntity<Object> findByRc(@RequestParam("replacementCost") double replacement_cost){
         List<Film> filmList = filmService.findByRc(replacement_cost);
 //        return (ResponseEntity<Objects>) filmList;
+        if(filmList.isEmpty()) {
+            return ResponseHandler.generateResponse(ERROR_MSG, HttpStatus.NOT_FOUND, null);
+        }
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
+    }
+
+    @GetMapping("/film/findByRating")
+    public ResponseEntity<Object> findByRating(@RequestParam("rating") String rating) {
+        List<Film> filmList = filmService.findByRating(rating);
+        if(filmList.isEmpty()) {
+            return ResponseHandler.generateResponse(ERROR_MSG, HttpStatus.NOT_FOUND, null);
+        }
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
     }
 
 //    @GetMapping("/findByRc/{replacement_cost}")
@@ -51,12 +64,13 @@ public class FilmController {
 //        return findRc;
 //    }
 
-    @GetMapping("/film/findByRating")
-    public ResponseEntity<Object> fingByRating(@RequestParam("rating") String rating){
-        List<Film> filmList = filmService.findByRating(rating);
-        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
-//        return filmRepository.findByRating(rating);
-    }
+//    @GetMapping("/film/findByRating")
+//    public ResponseEntity<Object> fingByRating(@RequestParam("rating") String rating){
+//        List<Film> filmList = filmService.findByRating(rating);
+//        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
+////        return filmRepository.findByRating(rating);
+//    }
+
 
 
 
