@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilmServiceImpl implements FilmService {
@@ -19,6 +20,24 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public List<Film> findAll() {
         return filmRepository.findAll();
+    }
+
+    @Override
+    public Film findById(int id) {
+        Optional<Film> result = filmRepository.findById(id);
+        Film film;
+
+        if (result.isPresent()) {
+            film = result.get();
+        }else
+            throw new RuntimeException("Could not find film with id: " + id);
+
+        return film;
+    }
+
+    @Override
+    public List<Film> findByRentalDurationRange(int from, int to) {
+        return filmRepository.findByRentalDurationRange(from, to);
     }
 
     @Override
