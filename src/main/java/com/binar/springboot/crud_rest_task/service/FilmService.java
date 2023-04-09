@@ -12,7 +12,7 @@ public interface FilmService {
 
     List<Film> findByRc(double replacementCost);
 
-//    List<Film> findByRating(Rating rating);
+    List<Film> findByRating(String rating);
 
     List<Film> findByRentalDurationRange(int from, int to);
 
