@@ -23,8 +23,29 @@ public class FilmController {
     }
 
     @GetMapping("/film")
-    public ResponseEntity<Object> findAll() {
-        List<Film> filmList = filmService.findAll();
+    public ResponseEntity<Object> findAllOrByArgument() {
+        List<Film> filmList;
+        filmList = filmService.findAll();
+
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
+    }
+
+    @GetMapping(value = "/film", params = {"from", "to"})
+    public ResponseEntity<Object> findByRentalDurationRange(
+            @RequestParam("from") int from,
+            @RequestParam("to") int to
+    ) {
+        List<Film> filmList = filmService.findByRentalDurationRange(from, to);
+
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
+    }
+
+    @GetMapping(value = "/film", params = {"rCost"})
+    public ResponseEntity<Object> findByRc(
+            @RequestParam("r_cost") double rCost
+    ) {
+        List<Film> filmList = filmService.findByRc(rCost);
+
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
     }
 
@@ -34,28 +55,28 @@ public class FilmController {
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,film);
     }
 
-    @GetMapping("/film/save")
+    @PostMapping("/film/save")
     public ResponseEntity<Object> save(@RequestBody Film film){
         filmService.save(film);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,film);
     }
 
-    @GetMapping("/film/update")
+    @PutMapping("/film/update")
     public ResponseEntity<Object> update(@RequestBody int id, Film film ) {
         filmService.update(id, film);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, film);
     }
 
-    @GetMapping("/film/search")
-    public ResponseEntity<Object> findByRentalDurationRange(@RequestParam("from") int from, @RequestParam("to") int to){
-        List<Film> filmList = filmService.findByRentalDurationRange(from, to);
-        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
-    }
-
-    @GetMapping("/film/findByRc")
-    public ResponseEntity<Object> findByRc(@RequestParam("r_cost") double replacementCost){
-//        double cost = Double.parseDouble(replacementCost);
-        List<Film> filmList = filmService.findByRc(replacementCost);
-        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
-    }
+//    @GetMapping("/film/search")
+//    public ResponseEntity<Object> findByRentalDurationRange(@RequestParam("from") int from, @RequestParam("to") int to){
+//        List<Film> filmList = filmService.findByRentalDurationRange(from, to);
+//        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
+//    }
+//
+//    @GetMapping("/film/findByRc")
+//    public ResponseEntity<Object> findByRc(@RequestParam("r_cost") double replacementCost){
+////        double cost = Double.parseDouble(replacementCost);
+//        List<Film> filmList = filmService.findByRc(replacementCost);
+//        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
+//    }
 }

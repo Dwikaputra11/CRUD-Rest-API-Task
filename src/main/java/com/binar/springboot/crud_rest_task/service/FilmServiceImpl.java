@@ -57,7 +57,7 @@ public class FilmServiceImpl implements FilmService {
                 && film.getReleaseYear() != null && !film.getReleaseYear().isEmpty()
                 && film.getRentalDuration() > 0 && film.getRentalRate() > 0 && film.getLength() > 0
                 && film.getReplacementCost() > 0 && film.getRating() != null && !film.getRating().isEmpty()
-                && film.getLastUpdate() != null && !film.getLastUpdate().isEmpty()) {
+                ) {
             return filmRepository.save(film);
         } else {
             throw new RuntimeException("Data film tidak lengkap");
