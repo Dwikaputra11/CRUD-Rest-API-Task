@@ -54,8 +54,13 @@ public class FilmController {
 
     @GetMapping("/film/findByRc")
     public ResponseEntity<Object> findByRc(@RequestParam("r_cost") double replacementCost){
-//        double cost = Double.parseDouble(replacementCost);
         List<Film> filmList = filmService.findByRc(replacementCost);
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
+    }
+
+    @GetMapping("/film/findByRating")
+    public ResponseEntity<Object> findByRating(@RequestParam("rating") String rating) {
+        List<Film> filmList = filmService.findByRating(rating);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
     }
 }
