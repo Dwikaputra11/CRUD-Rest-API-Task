@@ -18,7 +18,7 @@ public interface FilmService {
 
     Film save (Film film);
 
-    Film update(int id, Film updatedFilm);
+    Film update(Film updatedFilm);
 
     void delete(int id);
 

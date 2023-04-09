@@ -54,8 +54,8 @@ public class FilmServiceImpl implements FilmService {
     public Film save(Film film) {
         if (film.getTitle() != null && !film.getTitle().isEmpty()
                 && film.getDescription() != null && !film.getDescription().isEmpty()
-                && film.getReleaseYear() != null && !film.getReleaseYear().isEmpty()
-                && film.getRentalDuration() > 0 && film.getRentalRate() > 0 && film.getLength() > 0
+                && film.getReleaseYear()> 0 && film.getRentalDuration() > 0
+                && film.getRentalRate() > 0 && film.getLength() > 0
                 && film.getReplacementCost() > 0 && film.getRating() != null && !film.getRating().isEmpty()
                 ) {
             return filmRepository.save(film);
@@ -65,8 +65,8 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Film update(int id, Film updatedFilm) {
-        Optional<Film> result = filmRepository.findById(id);
+    public Film update(Film updatedFilm) {
+        Optional<Film> result = filmRepository.findById(updatedFilm.getFilmId());
         Film film;
 
         if (result.isPresent()) {
@@ -79,7 +79,7 @@ public class FilmServiceImpl implements FilmService {
             film.setLength(updatedFilm.getLength());
             film.setReplacementCost(updatedFilm.getReplacementCost());
             film.setRating(updatedFilm.getRating());
-            film.setLastUpdate(updatedFilm.getLastUpdate());
+//            film.setLastUpdate(updatedFilm.getLastUpdate());
             return filmRepository.save(film);
         } else {
             throw new RuntimeException("Data film tidak ditemukan");

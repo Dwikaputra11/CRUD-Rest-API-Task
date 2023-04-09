@@ -62,8 +62,8 @@ public class FilmController {
     }
 
     @PutMapping("/film/update")
-    public ResponseEntity<Object> update(@RequestBody int id, Film film ) {
-        filmService.update(id, film);
+    public ResponseEntity<Object> update(@RequestBody Film film ) {
+        filmService.update(film);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, film);
     }
 

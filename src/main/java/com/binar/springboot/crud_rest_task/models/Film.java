@@ -7,19 +7,20 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 @Table(name = "film", schema = "public")
 public class Film {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
-    private Long filmId;
+    private int filmId;
 
     private String title;
 
     private String description;
 
-    private String releaseYear;
+    private int releaseYear;
 
     private int rentalDuration;
 
@@ -31,7 +32,7 @@ public class Film {
 
     private String rating;
 
-    private String lastUpdate; // "yyyy-mm-dd HH:mm:ss"
+//    private String lastUpdate; // "yyyy-mm-dd HH:mm:ss"
 
 
 }
