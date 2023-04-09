@@ -41,12 +41,16 @@ public class FilmController {
     }
 
     @GetMapping(value = "/film", params = {"rCost"})
-    public ResponseEntity<Object> findByRc(
-            @RequestParam("r_cost") double rCost
-    ) {
+    public ResponseEntity<Object> findByRc(@RequestParam("r_cost") double rCost) {
         List<Film> filmList = filmService.findByRc(rCost);
 
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK,filmList);
+    }
+
+    @GetMapping(value = "/film", params = {"rating"})
+    public ResponseEntity<Object> findByRating(@RequestParam("rating") String rating) {
+        List<Film> filmList = filmService.findByRating(rating);
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
     }
 
     @GetMapping("/film/{id}")
@@ -65,11 +69,5 @@ public class FilmController {
     public ResponseEntity<Object> update(@RequestBody Film film ) {
         filmService.update(film);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, film);
-    }
-
-    @GetMapping("/film/findByRating")
-    public ResponseEntity<Object> findByRating(@RequestParam("rating") String rating) {
-        List<Film> filmList = filmService.findByRating(rating);
-        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, filmList);
     }
 }
