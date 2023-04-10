@@ -36,8 +36,8 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<Film> findByRc(double replacementCost) {
-        return filmRepository.findByRc(replacementCost);
+    public List<Film> findByReplacementCost(double replacementCost) {
+        return filmRepository.findByReplacementCost(replacementCost);
     }
 
     @Override
@@ -79,7 +79,6 @@ public class FilmServiceImpl implements FilmService {
             film.setLength(updatedFilm.getLength());
             film.setReplacementCost(updatedFilm.getReplacementCost());
             film.setRating(updatedFilm.getRating());
-//            film.setLastUpdate(updatedFilm.getLastUpdate());
             return filmRepository.save(film);
         } else {
             throw new RuntimeException("Data film tidak ditemukan");

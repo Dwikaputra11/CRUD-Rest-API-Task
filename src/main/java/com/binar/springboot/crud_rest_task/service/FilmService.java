@@ -10,7 +10,7 @@ public interface FilmService {
 
     Film findById(int id);
 
-    List<Film> findByRc(double replacementCost);
+    List<Film> findByReplacementCost(double replacementCost);
 
     List<Film> findByRating(String rating);
 

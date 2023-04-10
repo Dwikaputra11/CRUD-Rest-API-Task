@@ -13,7 +13,7 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 
     // find film by replacementCost > 10
     @Query("SELECT f FROM Film f WHERE f.replacementCost > ?1")
-    List<Film> findByRc(double replacementCost);
+    List<Film> findByReplacementCost(double replacementCost);
     // find by Rating
     @Query(value = "SELECT f FROM Film f WHERE f.rating LIKE ?1%")
     List<Film> findByRating(String rating);

@@ -1,7 +1,6 @@
 package com.binar.springboot.crud_rest_task.exception;
 
 import com.binar.springboot.crud_rest_task.utils.ResponseHandler;
-import org.hibernate.JDBCException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.dao.DataAccessException;
