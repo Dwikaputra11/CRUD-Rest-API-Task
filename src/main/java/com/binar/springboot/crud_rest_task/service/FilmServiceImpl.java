@@ -36,6 +36,11 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
+    public List<Film> findByLength(int length) {
+        return filmRepository.findByLength(length);
+    }
+
+    @Override
     public List<Film> findByReplacementCost(double replacementCost) {
         return filmRepository.findByReplacementCost(replacementCost);
     }
@@ -87,6 +92,11 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public void delete(int id) {
-        // TODO document why this method is empty
+        Optional<Film> result = filmRepository.findById(id);
+        if (result.isPresent()) {
+            filmRepository.delete(result.get());
+        } else {
+            throw new RuntimeException("Data film tidak ditemukan");
+        }
     }
 }

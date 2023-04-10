@@ -32,7 +32,8 @@ public class FilmController {
             @RequestParam(value = "from", required = false) Integer from,
             @RequestParam(value = "to", required = false) Integer to,
             @RequestParam(value = "rCost", required = false) Double rCost,
-            @RequestParam(value = "rating", required = false) String rating
+            @RequestParam(value = "rating", required = false) String rating,
+            @RequestParam(value = "length", required = false) Integer length
     ) {
         List<Film> filmList;
         if((from != null && to != null) && (from < to)){
@@ -41,7 +42,9 @@ public class FilmController {
             filmList = filmService.findByReplacementCost(rCost);
         }else if(rating != null && !rating.isEmpty()){
             filmList = filmService.findByRating(rating);
-        }else{
+        } else if (length!= null) {
+            filmList = filmService.findByLength(length);
+        } else{
             filmList = filmService.findAll();
         }
 
@@ -64,5 +67,10 @@ public class FilmController {
     public ResponseEntity<Object> update(@RequestBody Film film ) {
         filmService.update(film);
         return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, film);
+    }
+    @DeleteMapping("/film/{id}")
+    public ResponseEntity<Object> delete(@PathVariable int id ) {
+        filmService.delete(id);
+        return ResponseHandler.generateResponse(SUCCESS_MSG, HttpStatus.OK, id);
     }
 }
