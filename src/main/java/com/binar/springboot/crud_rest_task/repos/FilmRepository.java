@@ -12,6 +12,7 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     // find film by length > 60
 
     // find film by replacementCost > 10
+//    Film findByTitle(String title);
     @Query("SELECT f FROM Film f WHERE f.replacementCost > ?1")
     List<Film> findByReplacementCost(double replacementCost);
     // find by Rating
@@ -20,4 +21,6 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     // find by rental duration between 2 and 5
     @Query(value = "SELECT f FROM Film f WHERE f.rentalDuration BETWEEN ?1 AND ?2")
     List<Film> findByRentalDurationRange(int from, int to);
+
+
 }
