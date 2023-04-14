@@ -3,6 +3,9 @@ package com.binar.springboot.crud_rest_task.service;
 import com.binar.springboot.crud_rest_task.models.Film;
 import com.binar.springboot.crud_rest_task.repos.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +21,8 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<Film> findAll() {
-        return filmRepository.findAll();
+    public Page<Film> findAll(Pageable pageable) {
+        return filmRepository.findAll(pageable);
     }
 
     @Override
@@ -36,23 +39,23 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<Film> findByLength(int length) {
-        return filmRepository.findByLength(length);
+    public Page<Film> findByLength(int length, Pageable pageable) {
+        return filmRepository.findByLength(length, pageable);
     }
 
     @Override
-    public List<Film> findByReplacementCost(double replacementCost) {
-        return filmRepository.findByReplacementCost(replacementCost);
+    public Page<Film> findByReplacementCost(double replacementCost, Pageable pageable) {
+        return filmRepository.findByReplacementCost(replacementCost, pageable);
     }
 
     @Override
-    public List<Film> findByRating(String rating) {
-        return filmRepository.findByRating(rating);
+    public Page<Film> findByRating(String rating, Pageable pageable) {
+        return filmRepository.findByRating(rating, pageable);
     }
 
     @Override
-    public List<Film> findByRentalDurationRange(int from, int to) {
-        return filmRepository.findByRentalDurationRange(from, to);
+    public Page<Film> findByRentalDurationRange(int from, int to, Pageable pageable) {
+        return filmRepository.findByRentalDurationRange(from, to, pageable);
     }
 
     @Override

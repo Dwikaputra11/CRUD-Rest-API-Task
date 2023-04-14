@@ -1,22 +1,24 @@
 package com.binar.springboot.crud_rest_task.service;
 
 import com.binar.springboot.crud_rest_task.models.Film;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface FilmService {
 
-    List<Film> findAll();
+    Page<Film> findAll(Pageable pageable);
 
     Film findById(int id);
 
-    List<Film> findByLength(int length);
+    Page<Film> findByLength(int length, Pageable pageable);
 
-    List<Film> findByReplacementCost(double replacementCost);
+    Page<Film> findByReplacementCost(double replacementCost, Pageable pageable);
 
-    List<Film> findByRating(String rating);
+    Page<Film> findByRating(String rating, Pageable pageable);
 
-    List<Film> findByRentalDurationRange(int from, int to);
+    Page<Film> findByRentalDurationRange(int from, int to, Pageable pageable);
 
     Film save (Film film);
 
