@@ -1,7 +1,6 @@
 package com.binar.springboot.crud_rest_task.controller;
 
 import com.binar.springboot.crud_rest_task.models.Film;
-import com.binar.springboot.crud_rest_task.request.FilterFilm;
 import com.binar.springboot.crud_rest_task.service.FilmService;
 import com.binar.springboot.crud_rest_task.utils.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -53,33 +49,9 @@ public class FilmController {
         } else{
             filmList = filmService.findAll(pageable);
         }
-//        films = filmList.getContent();
 
         return ResponseHandler.generatePagingResponse(SUCCESS_RETRIEVE_MSG, HttpStatus.OK,filmList);
     }
-
-//    @GetMapping("/film/search")
-//    public ResponseEntity<Object> findAll(
-//            @RequestBody FilterFilm film,
-//            @RequestParam(defaultValue ="0") int page,
-//            @RequestParam(defaultValue ="10") int size
-//    ) {
-//        List<Film> filmList;
-//
-//        if((film.getFrom() != null && film.getTo() != null) && (film.getFrom() < )){
-//            filmList = filmService.findByRentalDurationRange(from, to);
-//        }else if(rCost != null){
-//            filmList = filmService.findByReplacementCost(rCost);
-//        }else if(rating != null && !rating.isEmpty()){
-//            filmList = filmService.findByRating(rating);
-//        } else if (length != null) {
-//            filmList = filmService.findByLength(length);
-//        } else{
-//            filmList = filmService.findAll();
-//        }
-//
-//        return ResponseHandler.generateResponse(SUCCESS_RETRIEVE_MSG, HttpStatus.OK,filmList);
-//    }
 
     @GetMapping("/film/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") int id) {
